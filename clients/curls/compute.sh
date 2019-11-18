@@ -1,2 +1,2 @@
 
-curl -i localhost:8080/patients/compute
+curl -i localhost:8080/patients/compute/123
