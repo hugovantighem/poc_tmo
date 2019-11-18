@@ -1,4 +1,4 @@
-Sample commands to run against DB
+## Sample commands to run against DB
 
 sqlite3
 ```
@@ -20,14 +20,20 @@ psql -h localhost -d poc -U root -c "select count(*) from T_PATIENT;"
 psql -h localhost -d poc -U root -c "select * from T_PATIENT p left join T_EXAMINATION e on p.id = e.patient_id where p.firstname like '%123%' and e.weight = 50 order by requester asc;"
 ```
 
-Backend API
+## API clients
+
+Exec requests againts the backend API, using clients.
+
+### Command line client
 ```
-curl -i localhost:8080/patients/search/arg
-curl -i localhost:8080/patients/compute/arg
+sh clients/curls/compute.sh
 ```
 
+### Web client
+TODO simple Angular client
 
-## Docker
+
+## Postgres using Docker / docker-compose
 
 `docker/scripts/` folder is mounted into the `poc_postgres` container to easilly run sql scripts against DB.
 
