@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 import com.example.demo.dal.PatientRepository;
 import com.example.demo.model.Patient;
 
@@ -34,6 +34,11 @@ public class PatientController {
 
     private List<Patient> process(String value){
         List<Patient> result = repo.compute(value);
-        return result;
+        return result.stream().map(
+            item -> {
+                item.firstname = item.firstname.toUpperCase();
+                return item;
+            }
+        ).collect(Collectors.toList());
     }
 }
