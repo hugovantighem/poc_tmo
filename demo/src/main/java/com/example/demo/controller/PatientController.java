@@ -34,11 +34,25 @@ public class PatientController {
 
     private List<Patient> process(String value){
         List<Patient> result = repo.compute(value);
+        this.compute(result);
         return result.stream().map(
             item -> {
                 item.firstname = item.firstname.toUpperCase();
                 return item;
             }
         ).collect(Collectors.toList());
+    }
+
+    /**
+     * Simulate processing
+     * 
+     * @param items
+     */
+    private void compute(List<Patient> items){
+        items.stream().map(
+            item -> Integer.parseInt(item.firstname.split("_")[1])
+        ).reduce(
+            0, (total, item) -> item % 2 == 0 ? total+1 : total
+        );
     }
 }
