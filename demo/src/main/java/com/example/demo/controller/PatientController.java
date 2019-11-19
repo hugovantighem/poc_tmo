@@ -33,7 +33,7 @@ public class PatientController {
 
 
     private List<Patient> process(String value){
-        List<Patient> result = repo.compute(value);
+        List<Patient> result = repo.computeSimple(value);
         this.compute(result);
         return result.stream().map(
             item -> {
