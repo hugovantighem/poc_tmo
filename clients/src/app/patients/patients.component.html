@@ -1,0 +1,50 @@
+<h1>Patients list</h1>
+<div class="row">
+    <div class="col-md-12">
+        <form #patientsForm="ngForm" novalidate>
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    [(ngModel)]="searchParam.firstName"
+                    #firstName="ngModel"
+                    required
+                    placeholder="Search a patient"
+                />
+
+                <div class="input-group-append">
+                    <button
+                        type="button"
+                        class="btn btn-outline-primary"
+                        (click)="search($event)"
+                    >
+                        Search
+                    </button>
+                </div>
+                <div class="input-group-append">
+                    <button
+                        type="button"
+                        class="btn btn-outline-warning"
+                        (click)="compute($event)"
+                    >
+                        Compute
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ag-grid-angular
+            style="width: 100%; height: 500px;"
+            class="ag-theme-balham"
+            [rowData]="patients"
+            [columnDefs]="columnDefs"
+            [modules]="modules"
+        >
+        </ag-grid-angular>
+    </div>
+</div>
