@@ -8,7 +8,7 @@ import { IPatient } from "../shared/interfaces";
 
 @Injectable()
 export class DataService {
-    private baseAdress = "http://10.11.6.117:8080";
+    private baseAdress = "http://localhost:8080";
     private patientsSearchtUrl = `${this.baseAdress}/patients/search/`;
     private computationBaseUrl = `${this.baseAdress}/patients/compute/`;
 
