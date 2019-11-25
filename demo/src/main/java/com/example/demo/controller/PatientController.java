@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.example.demo.dal.PatientRepository;
 import com.example.demo.model.Patient;
+import com.example.demo.util.Fibonacci;
+import com.example.demo.util.FibonacciResult;
 
 
 @RestController
@@ -31,9 +33,18 @@ public class PatientController {
         return ResponseEntity.ok().body(this.process(value));
     }
 
+    @GetMapping("fib/{value}")
+    public ResponseEntity<Integer> fib(@PathVariable("value") String value) {
+        System.out.println("fib " + value);
+        Fibonacci fib = new Fibonacci();
+        Integer result = fib.compute(Integer.parseInt(value));
+        return ResponseEntity.ok().body(result);
+    }
+
+
 
     private List<Patient> process(String value){
-        List<Patient> result = repo.compute(value);
+        List<Patient> result = repo.computeSimple(value);
         this.compute(result);
         return result.stream().map(
             item -> {
