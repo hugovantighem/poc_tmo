@@ -27,9 +27,10 @@ def insert_multiple(rows):
 
     data.close()
 
-insert_patient = 'INSERT INTO T_PATIENT (id, email, firstname, lastname) VALUES (\'{id}\',\'{email}\',\'{firstname}\',\'{lastname}\');\n'
-insert_examination = 'INSERT INTO T_EXAMINATION (weight, requester, patient_id) VALUES (\'{weight}\',\'{requester}\',\'{patient_id}\');\n'
+insert_patient = 'INSERT INTO T_PATIENT (id, email, firstname, lastname) VALUES ({id},\'{email}\',\'{firstname}\',\'{lastname}\');\n'
+insert_examination = 'INSERT INTO T_EXAMINATION (weight, requester, patient_id) VALUES (\'{weight}\',\'{requester}\',{patient_id});\n'
 
+# total = 100000 generate rows
 total = 2000000
 patient_ids = [n for n in range(total)]
 
