@@ -33,6 +33,12 @@ public class PatientController {
         return ResponseEntity.ok().body(this.process(value));
     }
 
+    @GetMapping("compute2/{value}")
+    public ResponseEntity<List<Patient>> compute2(@PathVariable("value") String value) {
+        System.out.println("compute2 " + value);
+        return ResponseEntity.ok().body(this.process(value));
+    }
+
     @GetMapping("fib/{value}")
     public ResponseEntity<Integer> fib(@PathVariable("value") String value) {
         System.out.println("fib " + value);
@@ -52,6 +58,17 @@ public class PatientController {
     private List<Patient> process(String value){
         List<Patient> result = repo.computeSimple(value);
         this.compute(result);
+        return result.stream().map(
+            item -> {
+                item.firstname = item.firstname.toUpperCase();
+                return item;
+            }
+        ).collect(Collectors.toList());
+    }
+
+
+    private List<Patient> process2(String value){
+        List<Patient> result = repo.computeSimple2("firstname_" + value);
         return result.stream().map(
             item -> {
                 item.firstname = item.firstname.toUpperCase();
