@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import com.example.demo.dal.PatientRepository;
 import com.example.demo.model.Patient;
 import com.example.demo.util.Fibonacci;
-import com.example.demo.util.FibonacciResult;
 
 
 @RestController
@@ -41,6 +41,12 @@ public class PatientController {
         return ResponseEntity.ok().body(result);
     }
 
+    @PostMapping("add")
+    public ResponseEntity<Void> add() {
+        System.out.println("add ");
+        this.addPatient();
+        return ResponseEntity.ok().body(null);
+    }
 
 
     private List<Patient> process(String value){
@@ -65,5 +71,24 @@ public class PatientController {
         ).reduce(
             0, (total, item) -> item % 2 == 0 ? total+1 : total
         );
+    }
+
+
+    private void addPatient(){
+        Patient item = new Patient();
+        String identifier = UUID.randomUUID().toString();
+        item.email = identifier + "@test.com";
+        item.firstname = "F_" + identifier;
+        item.lastname = "L_" + identifier;
+        item.id = generateId();
+
+        repo.save(item);
+    }
+
+    private Long id = 3000000L;
+
+    private synchronized Long generateId() {
+        id = id++;
+        return id;
     }
 }
